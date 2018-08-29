@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView numberView;
     private Button executeButton;
     private TextView statusView;
+
+    static final int NUMBERS_LENGTH = 4;
 
     static final int ASSERTED_NUMBER_AND_INDEX = 0;
     static final int ASSERTED_NUMBER = 1;
@@ -44,12 +45,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRandomNumber() {
-        int randomNumber = minNumberRandom + (int)(Math.random() * ((maxNumberRandom - minNumberRandom) + 1));
+        int randomNumber = getRandomNumber();
         this.randomNumberInList = numberToStringList(randomNumber);
 
         Toast.makeText(getApplicationContext(), "Ya tenemos un numerito para que adivines", Toast.LENGTH_SHORT).show();
         // Test show TODO: delete this row
         this.statusView.setText(randomNumberInList.toString());
+    }
+
+    private int getRandomNumber() {
+        int randomNumber = minNumberRandom + (int)(Math.random() * ((maxNumberRandom - minNumberRandom) + 1));
+        while (!this.isAValidRandomNumber(randomNumber)){
+            randomNumber =  minNumberRandom + (int)(Math.random() * ((maxNumberRandom - minNumberRandom) + 1));
+        }
+        return randomNumber;
+    }
+
+    private boolean isAValidRandomNumber(int randomNumber) {
+        this.randomNumberInList = numberToStringList(randomNumber);
+
+        for(int i=0; i < NUMBERS_LENGTH; i++){
+            for(int j=i+1; j < NUMBERS_LENGTH; j++){
+                if(randomNumberInList.get(i).equals(randomNumberInList.get(j))){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void addListeners() {
