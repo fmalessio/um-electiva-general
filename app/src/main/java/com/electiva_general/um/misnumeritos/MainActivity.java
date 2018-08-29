@@ -8,6 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView numberView;
     private Button executeButton;
     private TextView statusView;
+
+    static final int ASSERTED_NUMBER_AND_INDEX = 0;
+    static final int ASSERTED_NUMBER = 1;
+    static final int NOT_ASSERTED = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +59,32 @@ public class MainActivity extends AppCompatActivity {
                 String playerNumber = numberView.getText().toString();
                 ArrayList<String> playerNumberList = numberToStringList(new Integer(playerNumber));
 
-                // TODO: compare "playerNumberList" with "randomNumberInList"
+                Map<Integer, Integer> assertions = validatePlayerNumber(playerNumberList, randomNumberInList);
 
-                // TODO: Show result in new view element
-                Toast.makeText(getApplicationContext(), playerNumberList.toString(), Toast.LENGTH_SHORT).show();
+                String response = "Cantidad de numeros bien:" + assertions.get(ASSERTED_NUMBER_AND_INDEX).toString() +
+                        " .Cantidad de numeros Regular: " + assertions.get(ASSERTED_NUMBER).toString();
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private Map<Integer, Integer> validatePlayerNumber(ArrayList<String> playerNumberList, ArrayList<String> randomNumberInList) {
+        Map<Integer, Integer> assertions = new HashMap<>();
+        assertions.put(ASSERTED_NUMBER_AND_INDEX, 0);
+        assertions.put(ASSERTED_NUMBER, 0);
+
+        for(String playerNumber : playerNumberList){
+            for(String randomNumber : randomNumberInList){
+                if(playerNumber.equals(randomNumber)){
+                    if(playerNumberList.indexOf(randomNumber) == randomNumberInList.indexOf(randomNumber)){
+                        assertions.put(ASSERTED_NUMBER_AND_INDEX, assertions.get(ASSERTED_NUMBER_AND_INDEX) + 1);
+                    } else {
+                        assertions.put(ASSERTED_NUMBER, assertions.get(ASSERTED_NUMBER) + 1);
+                    }
+                }
+            }
+        }
+        return assertions;
     }
 
     private ArrayList<String> numberToStringList(int number) {
