@@ -18,15 +18,20 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 3;
+    private String sessionId;
+    private String sessionUser;
 
     // UI
     private SignInButton signInButton;
-
+    private Button closeAppButton;
 
 
     @Override
@@ -58,6 +63,21 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
+        closeAppButton = (Button) findViewById(R.id.closeAppButton);
+        closeAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Volvé a jugar cuando quieras! Te esperamos!", Toast.LENGTH_SHORT).show();
+
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        finish();
+                        System.exit('0');
+                    }
+                },3000);
+            }
+        });
     }
 
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
@@ -77,6 +97,9 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     private void handledSignInResult(GoogleSignInResult result) {
         if(result.isSuccess()){
             Toast.makeText(this, R.string.successful_connection, Toast.LENGTH_SHORT).show();
+            GoogleSignInAccount account = result.getSignInAccount();
+            sessionId = account.getId();
+            sessionUser = account.getGivenName();
             goMainScreen();
         }
         else{
@@ -87,6 +110,10 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.putExtra("EXTRA_SESSION_ID", sessionId);
+        //intent.putExtra("EXTRA_SESSION_USER", sessionUser);
         startActivity(intent);
     }
+
+
 }

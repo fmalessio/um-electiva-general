@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroud"
+    tools:context=".SplashActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="243dp"
+        android:layout_height="298dp"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/logo_mis_numeritos" />
+
+    <TextView
+        android:id="@+id/appNameTextView"
+        android:layout_width="287dp"
+        android:layout_height="57dp"
+        android:layout_above="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="monospace"
+        android:text="MIS NUMERITOS"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

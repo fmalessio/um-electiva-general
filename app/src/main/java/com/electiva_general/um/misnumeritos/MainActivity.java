@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -21,13 +19,21 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     // UI
     private Button playButton;
+    private Button scoresButton;
+    private Button instructionsButton;
+    private Button aboutButton;
+    private Button logOutButton;
+    private Button revokeButton;
 
-    private TextView nameTextView;
-    private TextView idTextView;
+    private TextView userNameTextView;
+    private TextView userIdTextView;
 
 
     // Silent LogIn
@@ -38,11 +44,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nameTextView = (TextView) findViewById(R.id.nameTextView);
-        idTextView = (TextView) findViewById(R.id.idTextView);
+        userNameTextView = (TextView) findViewById(R.id.nameTextView);
+        userIdTextView = (TextView) findViewById(R.id.idTextView);
 
         playButton = findViewById(R.id.playButton);
+        scoresButton = findViewById(R.id.scoresButton);
+        instructionsButton = findViewById(R.id.instructionsButton);
+        aboutButton = findViewById(R.id.aboutButton);
+        logOutButton = findViewById(R.id.logOutButton);
+        revokeButton = findViewById(R.id.revokeButton);
 
+
+        //*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -51,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
+        //*/
 
         addListeners();
     }
@@ -71,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onStart() {
         super.onStart();
 
+        userNameTextView.setText("Usuario");
+        userIdTextView.setText("0");
+
+        //*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
         if(opr.isDone()){
             GoogleSignInResult result = opr.get();
@@ -84,19 +101,25 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
             });
         }
+        //*/
+
     }
 
     private void handleSignInResult(GoogleSignInResult result){
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
 
-            nameTextView.setText(account.getGivenName());
-            idTextView.setText(account.getId());
+            userNameTextView.setText("Hola "+ account.getGivenName()+"!");
+            userIdTextView.setText(account.getId());
         }
         else {
             goLogInScreen();
         }
 
+    }
+
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
+        Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
     }
 
     private void goLogInScreen() {
@@ -105,18 +128,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         startActivity(intent);
     }
 
-
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
-        Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
-    }
-
     public void logOut(View view){
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
                 if(status.isSuccess()){
-                    goLogInScreen();
-                }
+                    Toast.makeText(getApplicationContext(), "Se cerró la sesión de tu cuenta", Toast.LENGTH_SHORT).show();
+                    sessionClosed();                }
                 else{
                     Toast.makeText(getApplicationContext(), R.string.not_close_session, Toast.LENGTH_SHORT).show();
                 }
@@ -129,7 +147,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onResult(@NonNull Status status) {
                 if(status.isSuccess()){
-                    goLogInScreen();
+                    Toast.makeText(getApplicationContext(), "Se revocaron los permisos de la app", Toast.LENGTH_SHORT).show();
+                    sessionClosed();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), R.string.not_revoke, Toast.LENGTH_SHORT).show();
@@ -138,4 +157,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         });
     }
 
+    private void sessionClosed(){
+        userNameTextView.setText("Usuario Anónimo");
+        userIdTextView.setText("0");
+
+        playButton.setEnabled(false);
+        scoresButton.setEnabled(false);
+        instructionsButton.setEnabled(false);
+        aboutButton.setEnabled(false);
+        logOutButton.setEnabled(false);
+        revokeButton.setEnabled(false);
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                goLogInScreen();
+            }
+        }, 3000);
+    }
 }
