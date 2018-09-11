@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "575566175107",
+    "firebase_url": "https://um-adivinarelnumero.firebaseio.com",
+    "project_id": "um-adivinarelnumero",
+    "storage_bucket": "um-adivinarelnumero.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575566175107:android:2d4cdc89fb565c60",
+        "android_client_info": {
+          "package_name": "com.electiva_general.um.misnumeritos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575566175107-62n8mkg193s26su3gt123eu61ilska72.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.electiva_general.um.misnumeritos",
+            "certificate_hash": "51bac5a2aa1a354165e3cebc45f7828e1fbb4e25"
+          }
+        },
+        {
+          "client_id": "575566175107-t45qf5qjql1g001reoh01j5sh4m6rg0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUqIufjT6GSnQOqGCvVeGXX5lGt_z6hI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575566175107-t45qf5qjql1g001reoh01j5sh4m6rg0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
