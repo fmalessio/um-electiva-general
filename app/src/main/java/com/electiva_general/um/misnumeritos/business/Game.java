@@ -10,21 +10,21 @@ public final class Game {
     private static final byte FINISHED = 3;
 
     // Business rules
-    private static final int MAX_ATTEMPTS = 10;
     private static final int MAXIMUM_NUMBER = 1023;
     private static final int MINIMUM_NUMBER = 9876;
     private static final int NUMBERS_LENGTH = 4;
 
-    private Move[] moves;
-    private int attempt = 0;
+    private ArrayList<Move> moves;
     private byte state;
 
     private ArrayList<String> numberToGuess;
 
     public Game() {
         this.state = Game.PLAYING;
-        this.moves = new Move[MAX_ATTEMPTS];
+        this.moves = new ArrayList<>();
         setRandomNumber();
+
+        // TODO: save new game on database
     }
 
     private void setRandomNumber() {
@@ -62,12 +62,13 @@ public final class Game {
         }
 
         Move output = new Move(this.numberToGuess, playedNumberList);
-        moves[attempt] = output;
+        moves.add(output);
 
-        attempt++;
-
-        if (attempt == MAX_ATTEMPTS || isGameWon())
+        if (isWinnerMove()) {
             state = Game.FINISHED;
+        }
+
+        // TODO: save on database: the new move, the number of attempts and the new game state if applicable
 
         return output;
     }
@@ -90,22 +91,35 @@ public final class Game {
         return numberToGuess;
     }
 
-    private boolean isGameWon() {
-        // TODO: put logic to Won the game
-        return false;
+    private boolean isWinnerMove() {
+        return lastMove().getAssertedNumberAndIndex() == Game.NUMBERS_LENGTH;
     }
 
     public Move lastMove() {
-        return moves[attempt];
+        return moves.get(moves.size() - 1);
     }
 
-    public Move[] getMoves() {
+    public ArrayList<Move> getMoves() {
         return moves;
     }
 
-    // e) Abandonar el juego ("Me doy")
+    // e) Leave the game ("Me doy")
     public void leave() {
         state = Game.ABORTED;
+
+        // TODO: save new game state on database
+    }
+
+    public boolean isGameFinished(){
+        return (state != Game.ABORTED && state != Game.FINISHED);
+    }
+
+    public int getNumberOfMoves(){
+        return moves.size();
+    }
+
+    public boolean isGameWon(){
+        return state == Game.FINISHED;
     }
 
 }

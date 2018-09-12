@@ -1,5 +1,6 @@
 package com.electiva_general.um.misnumeritos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
         // Test show TODO: delete this row
         this.statusView.setText(game.getNumberToGuess().toString());
 
+        // TODO: add "Me doy" button which should call to game.leave() and redirect to finished game activity
+
         // events
         addListeners();
     }
@@ -49,7 +52,14 @@ public class GameActivity extends AppCompatActivity {
 
                 Move lastMove;
                 try {
+
                     lastMove = game.doNewMove(playerNumber);
+
+                    // IF THE PLAYER WON OR LEFT (FINISHED IS ABORTED OR WON), OPEN FINISHED GAME ACTIVITY
+                    if (game.isGameFinished())
+                    {
+                        GoToFinishedGameActivity();
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -63,5 +73,12 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-
+    private void GoToFinishedGameActivity()
+    {
+        Intent finishedGameActivity = new Intent(GameActivity.this, FinishedGameActivity.class);
+        finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
+        finishedGameActivity.putExtra("Attempts", game.getNumberOfMoves());
+        finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
+        startActivity(finishedGameActivity);
+    }
 }
