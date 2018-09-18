@@ -3,22 +3,22 @@ package com.electiva_general.um.misnumeritos.business;
 
 public class Score {
 
-    private String userId;
+    private String user;
     private int attempts;
 
     public Score(){}
 
-    public Score(String _userId, int _attempts){
-        this.userId = _userId;
+    public Score(String _user, int _attempts){
+        this.user = _user;
         this.attempts = _attempts;
     }
 
 
-    public String getUserId() {
-        return userId;
+    public String getUser() {
+        return user;
     }
-    public void setUserId(String _userId){
-        this.userId = _userId;
+    public void setUser(String _user){
+        this.user = _user;
     }
 
     public int getAttempts(){

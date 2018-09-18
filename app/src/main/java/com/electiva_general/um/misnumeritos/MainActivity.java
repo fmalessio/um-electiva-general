@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.electiva_general.um.misnumeritos.business.Score;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -18,6 +19,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         revokeButton = findViewById(R.id.revokeButton);
 
 
+
+
         //*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         //*/
 
         addListeners();
+
     }
 
     private void addListeners() {
@@ -111,6 +117,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             userNameTextView.setText("Hola "+ account.getGivenName()+"!");
             userIdTextView.setText(account.getId());
+
+            //*
+            //TODO : delete
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
+
+            myRef.child("scores").push().setValue(new Score(account.getDisplayName(),6));
+
+            //*/
+
         }
         else {
             goLogInScreen();

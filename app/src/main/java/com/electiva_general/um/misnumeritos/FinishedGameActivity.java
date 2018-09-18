@@ -1,8 +1,14 @@
 package com.electiva_general.um.misnumeritos;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
 import java.util.ArrayList;
+
+
 
 public class FinishedGameActivity extends AppCompatActivity {
 
@@ -38,4 +44,15 @@ public class FinishedGameActivity extends AppCompatActivity {
         // TODO: add button to start a new game (navigate to game activity)
         // TODO: add button to see scores (navigate to scores activity)
     }
+
+
+
+
+
+
+
+
+
+
+
 }
