@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                     });
                 }
             }
-        },3000);
+        },1500);
 
 
     }

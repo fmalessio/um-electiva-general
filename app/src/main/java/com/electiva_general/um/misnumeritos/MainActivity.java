@@ -83,6 +83,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 startActivity(gameActivity);
             }
         });
+
+        scoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scoreActivity = new Intent(MainActivity.this, ScoreActivity.class);
+                startActivity(scoreActivity);
+            }
+        });
     }
 
 
@@ -117,16 +125,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             userNameTextView.setText("Hola "+ account.getGivenName()+"!");
             userIdTextView.setText(account.getId());
-
-            //*
-            //TODO : delete
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference();
-
-            myRef.child("scores").push().setValue(new Score(account.getDisplayName(),6));
-
-            //*/
-
         }
         else {
             goLogInScreen();

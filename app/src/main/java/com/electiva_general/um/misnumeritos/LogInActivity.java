@@ -75,7 +75,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                         finish();
                         System.exit('0');
                     }
-                },3000);
+                },1500);
             }
         });
     }
