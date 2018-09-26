@@ -14,6 +14,7 @@ import com.electiva_general.um.misnumeritos.business.Move;
 public class GameActivity extends AppCompatActivity {
 
     private Game game;
+    private String username;
 
     // From view
     private TextView numberView;
@@ -24,6 +25,13 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Bundle extras = getIntent().getExtras();
+        // TODO: THESE VALUES MAY BE RETRIEVED FROM DATABASE AS A SAFER PRACTICE, INSTEAD OF GETTING THEM FROM THE PREVIOUS ACTIVITY
+        // TODO: if extras is null, or any of the keys are not found, send error message to screen
+        if (extras != null) {
+            username = extras.getString("Username");
+        }
 
         // Layout references
         executeButton = findViewById(R.id.executeButton);
@@ -77,8 +85,10 @@ public class GameActivity extends AppCompatActivity {
     {
         Intent finishedGameActivity = new Intent(GameActivity.this, FinishedGameActivity.class);
         finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
+        finishedGameActivity.putExtra("Username", username);
         finishedGameActivity.putExtra("Attempts", game.getNumberOfMoves());
         finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
+
         startActivity(finishedGameActivity);
     }
 }

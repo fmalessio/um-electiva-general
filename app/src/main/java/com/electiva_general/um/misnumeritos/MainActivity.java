@@ -27,6 +27,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    private String username = "user";
     // UI
     private Button playButton;
     private Button scoresButton;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View v) {
                 Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
+                gameActivity.putExtra("Username", username);
                 startActivity(gameActivity);
             }
         });
@@ -123,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
 
-            userNameTextView.setText("Hola "+ account.getGivenName()+"!");
+            username = account.getDisplayName();
+            userNameTextView.setText("Hola "+ account.getGivenName() +"!");
             userIdTextView.setText(account.getId());
         }
         else {

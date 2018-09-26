@@ -111,7 +111,8 @@ public final class Game {
     }
 
     public boolean isGameFinished(){
-        return (state != Game.ABORTED && state != Game.FINISHED);
+        //return (state != Game.ABORTED && state != Game.FINISHED);
+        return (state == Game.ABORTED || state == Game.FINISHED);
     }
 
     public int getNumberOfMoves(){
