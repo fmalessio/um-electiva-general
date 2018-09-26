@@ -27,7 +27,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private String username = "user";
+    private String username = "Usuario Anónimo";
     // UI
     private Button playButton;
     private Button scoresButton;
@@ -100,10 +100,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onStart() {
         super.onStart();
 
-        userNameTextView.setText("Usuario");
+        username = "Usuario Anónimo";
+        userNameTextView.setText(username);
         userIdTextView.setText("0");
 
-        //*
+        /*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
         if(opr.isDone()){
             GoogleSignInResult result = opr.get();
@@ -175,7 +176,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void sessionClosed(){
-        userNameTextView.setText("Usuario Anónimo");
+        username = "Usuario Anónimo";
+        userNameTextView.setText(username);
         userIdTextView.setText("0");
 
         playButton.setEnabled(false);

@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_splash);
 
 
+        /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -46,6 +47,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+        //*/
 
     }
 
@@ -55,9 +57,12 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     protected void onStart() {
         super.onStart();
 
+        //*
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                goMainScreen();
+                /*
                 OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
                 if(opr.isDone()){
                     GoogleSignInResult result = opr.get();
@@ -71,10 +76,10 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                         }
                     });
                 }
+                //*/
             }
         },1500);
-
-
+        //*/
     }
 
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
@@ -97,8 +102,8 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
 
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("EXTRA_SESSION_ID", sessionId);
-        intent.putExtra("EXTRA_SESSION_USER", sessionUser);
+        //intent.putExtra("EXTRA_SESSION_ID", sessionId);
+        //intent.putExtra("EXTRA_SESSION_USER", sessionUser);
         startActivity(intent);
     }
 
