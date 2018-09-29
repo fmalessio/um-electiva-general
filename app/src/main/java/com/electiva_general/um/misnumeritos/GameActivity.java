@@ -3,8 +3,10 @@ package com.electiva_general.um.misnumeritos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView numberView;
     private Button executeButton;
     private TextView statusView;
+    private EditText movesET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,11 @@ public class GameActivity extends AppCompatActivity {
         executeButton = findViewById(R.id.executeButton);
         numberView = findViewById(R.id.numberInputText);
         statusView = findViewById(R.id.statusText);
+        movesET = findViewById(R.id.movesET);
+
+        movesET.setTag(movesET.getKeyListener());
+        movesET.setKeyListener(null);
+//        movesET.setKeyListener((KeyListener) movesET.getTag());
 
         // Create new Game
         game = new Game();
@@ -74,9 +82,10 @@ public class GameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String response = lastMove.toString();
+                String moves = lastMove.toString() + "\n" + movesET.getText().toString();
+                movesET.setText(moves);
 
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
             }
         });
     }
