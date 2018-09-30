@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         userNameTextView.setText(username);
         userIdTextView.setText("0");
 
-        /*
+        //*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
         if(opr.isDone()){
             GoogleSignInResult result = opr.get();

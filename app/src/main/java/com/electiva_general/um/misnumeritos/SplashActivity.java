@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_splash);
 
 
-        /*
+        //*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -62,7 +62,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
             @Override
             public void run() {
                 goMainScreen();
-                /*
+                //*
                 OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
                 if(opr.isDone()){
                     GoogleSignInResult result = opr.get();
