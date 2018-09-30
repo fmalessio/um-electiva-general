@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Genio!"
+        android:text="Titulo"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvAFG_title"
         android:layout_centerHorizontal="true"
-        android:text="TextView"
+        android:text="mensaje"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvAFG_message"
         android:layout_centerHorizontal="true"
-        android:text="4 intentos"
+        android:text="intentos"
         android:textSize="18sp" />
 
     <TextView
@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvAFG_attempts"
         android:layout_centerHorizontal="true"
-        android:text="Numero: 3829"
+        android:text="Numero"
         android:textSize="18sp" />
+
 </RelativeLayout>

@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         revokeButton = findViewById(R.id.revokeButton);
 
 
+        instructionsButton.setVisibility(View.INVISIBLE);
+        aboutButton.setVisibility(View.INVISIBLE);
 
 
         //*
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Intent intent = new Intent(this, LogInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void logOut(View view){

@@ -105,12 +105,14 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         //intent.putExtra("EXTRA_SESSION_ID", sessionId);
         //intent.putExtra("EXTRA_SESSION_USER", sessionUser);
         startActivity(intent);
+        finish();
     }
 
     private void goLogInScreen() {
         Intent intent = new Intent(this, LogInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 }

@@ -26,9 +26,8 @@
         style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/numberInputText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="169dp"
         android:background="@android:color/holo_red_dark"
         android:text="Verificar"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -41,9 +40,8 @@
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/numberInputText"
         android:text="Adivinando..."
         android:textAllCaps="true"
         android:textStyle="bold|italic"
@@ -64,16 +62,30 @@
 
     <EditText
         android:id="@+id/movesET"
-        android:layout_width="293dp"
-        android:layout_height="192dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/executeButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp"
         android:background="@android:color/transparent"
         android:ems="10"
+        android:gravity="top|left"
         android:inputType="textMultiLine"
+        android:maxHeight="250dp"
+        android:scrollbars="vertical"
         android:textAlignment="center"
-        android:textColor="#3F51B5"
-        android:textSize="18sp" />
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <Button
+        android:id="@+id/leaveButton"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_red_dark"
+        android:text="Me Doy"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic" />
 
 </RelativeLayout>

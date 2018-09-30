@@ -35,7 +35,7 @@ public final class Move {
                 ", Cantidad Bien =" + assertedNumberAndIndex +
                 ", Cantidad Regular =" + assertedNumber +
                 '}';*/
-        return "Resultado: " + ShowPlayedNumber() + " Bien=" + assertedNumberAndIndex +
+        return "Resultado: " + ShowPlayedNumber() + " - Bien=" + assertedNumberAndIndex +
                 ", Regular=" + assertedNumber;
     }
 

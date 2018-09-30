@@ -113,6 +113,7 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         //intent.putExtra("EXTRA_SESSION_ID", sessionId);
         //intent.putExtra("EXTRA_SESSION_USER", sessionUser);
         startActivity(intent);
+        finish();
     }
 
 

@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,14 +106,6 @@ public class FinishedGameActivity extends AppCompatActivity {
 
         loadUIMessages();
         loadTopTen();
-        /*
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                loadTopTen();
-            }
-        },1000);
-        //*/
     }
 
 
@@ -171,10 +165,10 @@ public class FinishedGameActivity extends AppCompatActivity {
              title = "GENIO/A!!!";
                 message = "En un solo intento!";
             }
-            else if(attempts < 4) {
+            else if(attempts <= 4) {
                 message = "Adivinaste el número";
             }
-            else if(attempts < 10){
+            else if(attempts <= 10){
                 message = "Probá hacerlo en menos intentos";
             }
             else{
@@ -187,8 +181,8 @@ public class FinishedGameActivity extends AppCompatActivity {
         }
         tvTitle.setText(title);
         tvMessage.setText(message);
-        tvNumber.setText("Número: "+numberToGuess);
-        tvAttempts.setText("Intentos: "+attempts);
+        tvAttempts.setText(attempts+" intentos");
+        tvNumber.setText("Número jugado: "+numberToGuess);
     }
 
 

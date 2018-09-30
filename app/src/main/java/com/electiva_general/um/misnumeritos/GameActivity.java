@@ -21,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
     // From view
     private TextView numberView;
     private Button executeButton;
+    private Button leaveButton;
     private TextView statusView;
     private EditText movesET;
 
@@ -38,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Layout references
         executeButton = findViewById(R.id.executeButton);
+        leaveButton = findViewById(R.id.leaveButton);
         numberView = findViewById(R.id.numberInputText);
         statusView = findViewById(R.id.statusText);
         movesET = findViewById(R.id.movesET);
@@ -88,6 +90,14 @@ public class GameActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
             }
         });
+
+        leaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                game.leave();
+                GoToFinishedGameActivity();
+            }
+        });
     }
 
     private void GoToFinishedGameActivity()
@@ -99,5 +109,6 @@ public class GameActivity extends AppCompatActivity {
         finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
 
         startActivity(finishedGameActivity);
+        finish();
     }
 }
