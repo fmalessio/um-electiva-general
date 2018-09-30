@@ -14,15 +14,16 @@ public final class Move {
     }
 
     private void validatePlayerNumber(ArrayList<String> numberToGuess, ArrayList<String> playerNumberList) {
-        for (String playerNumber : playerNumberList) {
-            for (String randomNumber : numberToGuess) {
-                if (playerNumber.equals(randomNumber)) {
-                    if (playerNumberList.indexOf(randomNumber) == numberToGuess.indexOf(randomNumber)) {
-                        assertedNumberAndIndex++;
-                    } else {
-                        assertedNumber++;
-                    }
-                }
+
+        for (int i = 0; i < numberToGuess.size(); i++)
+        {
+            if (numberToGuess.get(i).equals(playedNumber.get(i)))
+            {
+                assertedNumberAndIndex++;
+            }
+            else if (numberToGuess.contains(playedNumber.get(i)))
+            {
+                assertedNumber++;
             }
         }
     }
