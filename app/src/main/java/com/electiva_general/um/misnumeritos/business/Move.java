@@ -34,8 +34,8 @@ public final class Move {
                 ", Cantidad Bien =" + assertedNumberAndIndex +
                 ", Cantidad Regular =" + assertedNumber +
                 '}';*/
-        return "Resultado: Bien =" + assertedNumberAndIndex +
-                ", Regular =" + assertedNumber;
+        return "Resultado: " + ShowPlayedNumber() + " Bien=" + assertedNumberAndIndex +
+                ", Regular=" + assertedNumber;
     }
 
     public int getAssertedNumberAndIndex() {
@@ -44,5 +44,16 @@ public final class Move {
 
     public int getAssertedNumber() {
         return assertedNumber;
+    }
+
+    public String ShowPlayedNumber() {
+        String number = "";
+
+        for(String s: playedNumber)
+        {
+            number = number.concat(s);
+        }
+
+        return number;
     }
 }
