@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.electiva_general.um.misnumeritos.business.Score;
@@ -18,7 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class FinishedGameActivity extends AppCompatActivity {
@@ -27,6 +29,11 @@ public class FinishedGameActivity extends AppCompatActivity {
     private String username;
     private int attempts;
     private boolean isGameWon;
+
+    private TextView tvTitle;
+    private TextView tvMessage;
+    private TextView tvNumber;
+    private TextView tvAttempts;
 
     // Para recuperar los datos del top ten
     DatabaseReference dref;
@@ -41,8 +48,12 @@ public class FinishedGameActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        listview = (ListView) findViewById(R.id.listView_finished_score);
+        tvTitle = (TextView) findViewById(R.id.tvAFG_title);
+        tvMessage = (TextView) findViewById(R.id.tvAFG_message);
+        tvNumber = (TextView) findViewById(R.id.tvAFG_number);
+        tvAttempts = (TextView) findViewById(R.id.tvAFG_attempts);
 
+        listview = (ListView) findViewById(R.id.listView_finished_score);
 
 
         // TODO: THESE VALUES MAY BE RETRIEVED FROM DATABASE AS A SAFER PRACTICE, INSTEAD OF GETTING THEM FROM THE PREVIOUS ACTIVITY
@@ -74,6 +85,7 @@ public class FinishedGameActivity extends AppCompatActivity {
 
             Toast.makeText(this, scoreNode.getScore().getUser() + "-"+scoreNode.getScore().getAttempts(), Toast.LENGTH_SHORT).show();
 
+
         }
 
 
@@ -90,7 +102,16 @@ public class FinishedGameActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        loadUIMessages();
         loadTopTen();
+        /*
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                loadTopTen();
+            }
+        },1000);
+        //*/
     }
 
 
@@ -105,7 +126,10 @@ public class FinishedGameActivity extends AppCompatActivity {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
-                        topTenList.add(sn);
+                        if (topTenList.size() < 10 ||
+                                sn.getScore().getAttempts() < ((ScoreNode)topTenList.get(9)).getScore().getAttempts()) {
+                            topTenList.add(sn);
+                        }
                         adapter.notifyDataSetChanged();
                     }
                     @Override
@@ -137,8 +161,35 @@ public class FinishedGameActivity extends AppCompatActivity {
                 });
     }
 
+    public void loadUIMessages(){
+        String title;
+        String message;
 
-
+        if(isGameWon){
+            title = "GANASTE!";
+            if(attempts == 1) {
+             title = "GENIO/A!!!";
+                message = "En un solo intento!";
+            }
+            else if(attempts < 4) {
+                message = "Adivinaste el número";
+            }
+            else if(attempts < 10){
+                message = "Probá hacerlo en menos intentos";
+            }
+            else{
+                message = "Pero son muchos intentos...";
+            }
+        }
+        else{
+            title = "Pecho frío!";
+            message = "No te animaste a adivinarlo...";
+        }
+        tvTitle.setText(title);
+        tvMessage.setText(message);
+        tvNumber.setText("Número: "+numberToGuess);
+        tvAttempts.setText("Intentos: "+attempts);
+    }
 
 
 
