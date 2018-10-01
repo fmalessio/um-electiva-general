@@ -86,8 +86,6 @@ public class FinishedGameActivity extends AppCompatActivity {
             scoresRef.child("scores/"+key).setValue(scoreNode);
 
             Toast.makeText(this, scoreNode.getScore().getUser() + "-"+scoreNode.getScore().getAttempts(), Toast.LENGTH_SHORT).show();
-
-
         }
 
 

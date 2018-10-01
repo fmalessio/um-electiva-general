@@ -38,9 +38,9 @@ public final class ScoreNode {
         String response = "En " + score.getAttempts();
         if(score.getAttempts() == 1)
             response += " intento!!! :D";
-        else if(score.getAttempts() < 4)
+        else if(score.getAttempts() <= 4)
             response += " intentos! :)";
-        else if(score.getAttempts() <10)
+        else if(score.getAttempts() <= 10)
             response += " intentos :|";
         else
             response += " intentos :(";

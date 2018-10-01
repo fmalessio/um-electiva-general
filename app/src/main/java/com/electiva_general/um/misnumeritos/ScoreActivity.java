@@ -21,10 +21,7 @@ import java.util.TimerTask;
 
 public class ScoreActivity extends AppCompatActivity {
 
-
-    DatabaseReference dref;
     ListView listview;
-    ArrayList<String> list=new ArrayList<>();
     ArrayList<ScoreNode> topTenList = new ArrayList<>();
 
     @Override
@@ -36,19 +33,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         loadTopTen();
 
-        /*
-        int att = (int)(Math.random()*100);
-        final Score score = new Score("Pepe Rodriguez",att);
-        Toast.makeText(this, score.getUser() + "-"+score.getAttempts(), Toast.LENGTH_SHORT).show();
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                saveScore(score);
-            }
-        }, 3000);
-        //*/
-
         addListeners();
     }
 
@@ -57,17 +41,6 @@ public class ScoreActivity extends AppCompatActivity {
         // TODO: add button to see scores (navigate to scores activity)
     }
 
-    // TODO: para borrar, solo prueba
-    private void saveScore(Score score){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference dref = database.getReference();
-        // RECORDAR: TRABAJA CON ESTRUCTURA DE ARBOL, NO COMO DB RELACIONAL !!!
-        // Realiza el insert de un ID en el nodo "scores", y recupera en key el valor del ID insertado
-        String key = dref.child("scores").push().getKey();
-        // Inserta los datos de la clase Score dentro del nodo "key" creado
-        ScoreNode scoreNode = new ScoreNode(key, score);
-        dref.child("scores/"+key).setValue(scoreNode);
-    }
 
     private void loadTopTen(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
