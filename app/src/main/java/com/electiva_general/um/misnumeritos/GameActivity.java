@@ -1,6 +1,7 @@
 package com.electiva_general.um.misnumeritos;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.KeyListener;
@@ -28,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_game);
 
         Bundle extras = getIntent().getExtras();
@@ -53,10 +55,8 @@ public class GameActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Ya tenemos un numerito para que adivines", Toast.LENGTH_SHORT).show();
 
-        // Test show TODO: delete this row
+        // Test show
         this.statusView.setText(game.getNumberToGuess().toString());
-
-        // TODO: add "Me doy" button which should call to game.leave() and redirect to finished game activity
 
         // events
         addListeners();

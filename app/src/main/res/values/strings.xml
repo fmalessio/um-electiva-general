@@ -5,6 +5,6 @@
     <string name="not_close_session">No se pudo cerrar la sesión</string>
     <string name="not_login_session">No se pudo iniciar la sesión</string>
     <string name="successful_connection">Conexión exitosa</string>
-    <string name="permission_revoke">REVOCAR PERMISOS</string>
-    <string name="log_out">LOG OUT</string>
+    <string name="permission_revoke">Revocar Permisos</string>
+    <string name="log_out">Log Out</string>
 </resources>

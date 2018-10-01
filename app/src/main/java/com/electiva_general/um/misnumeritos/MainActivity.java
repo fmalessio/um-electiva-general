@@ -1,6 +1,7 @@
 package com.electiva_general.um.misnumeritos;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
         userNameTextView = (TextView) findViewById(R.id.nameTextView);
@@ -57,11 +59,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         aboutButton = findViewById(R.id.aboutButton);
         logOutButton = findViewById(R.id.logOutButton);
         revokeButton = findViewById(R.id.revokeButton);
-
-
-        instructionsButton.setVisibility(View.INVISIBLE);
-        aboutButton.setVisibility(View.INVISIBLE);
-
 
         //*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -101,9 +98,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onStart() {
         super.onStart();
-
-        username = "Usuario Anónimo";
-        userNameTextView.setText(username);
         userIdTextView.setText("0");
 
         //*

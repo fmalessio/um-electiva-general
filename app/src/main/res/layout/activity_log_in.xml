@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/padding_top"
+    android:paddingBottom="@dimen/padding_bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="81dp">
+    android:background="@color/backgroud"
+    tools:context=".LogInActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="0dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Ingresá con tu cuenta:"
+        android:textSize="24dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="26dp"
-            android:text="Ingresá con tu cuenta:"
-            android:textSize="24dp" />
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInButton"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp" />
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/signInButton"
-            android:layout_width="298dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="72dp" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:text="O cancela el acceso y cierra la app"
+        android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="71dp"
-            android:text="O cancela el acceso y cierra la app"
-            android:textSize="16dp" />
+    <Button
+        android:id="@+id/closeAppButton"
+        style="@android:style/Widget.Holo.Light.Button"
+        android:layout_width="236dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-71dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="CERRAR"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="147dp" />
 
-        <Button
-            android:id="@+id/closeAppButton"
-            android:layout_width="292dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="CERRAR" />
-             />
-
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
