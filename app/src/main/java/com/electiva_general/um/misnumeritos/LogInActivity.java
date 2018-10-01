@@ -8,24 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.electiva_general.um.misnumeritos.MainActivity;
-import com.electiva_general.um.misnumeritos.R;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.*;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class LogInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 3;
+    private GoogleApiClient googleApiClient;
     private String sessionId;
     private String sessionUser;
 
@@ -75,12 +72,12 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
                         finish();
                         System.exit('0');
                     }
-                },1500);
+                }, 1500);
             }
         });
     }
 
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, R.string.not_login_session, Toast.LENGTH_SHORT).show();
     }
 
@@ -88,21 +85,20 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handledSignInResult(result);
         }
     }
 
     private void handledSignInResult(GoogleSignInResult result) {
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             Toast.makeText(this, R.string.successful_connection, Toast.LENGTH_SHORT).show();
             GoogleSignInAccount account = result.getSignInAccount();
             sessionId = account.getId();
             sessionUser = account.getGivenName();
             goMainScreen();
-        }
-        else{
+        } else {
             Toast.makeText(this, R.string.not_login_session, Toast.LENGTH_SHORT).show();
         }
     }

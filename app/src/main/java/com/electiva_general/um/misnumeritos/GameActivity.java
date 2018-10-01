@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,8 +73,7 @@ public class GameActivity extends AppCompatActivity {
                     lastMove = game.doNewMove(playerNumber);
 
                     // IF THE PLAYER WON OR LEFT (FINISHED IS ABORTED OR WON), OPEN FINISHED GAME ACTIVITY
-                    if (game.isGameFinished())
-                    {
+                    if (game.isGameFinished()) {
                         GoToFinishedGameActivity();
                     }
 
@@ -100,8 +98,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToFinishedGameActivity()
-    {
+    private void GoToFinishedGameActivity() {
         Intent finishedGameActivity = new Intent(GameActivity.this, FinishedGameActivity.class);
         finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
         finishedGameActivity.putExtra("Username", username);

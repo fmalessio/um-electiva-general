@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.electiva_general.um.misnumeritos.business.Score;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -20,8 +19,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -102,11 +99,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         //*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if(opr.isDone()){
+        if (opr.isDone()) {
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
-        }
-        else{
+        } else {
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult result) {
@@ -118,21 +114,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
-    private void handleSignInResult(GoogleSignInResult result){
-        if(result.isSuccess()){
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
 
             username = account.getDisplayName();
-            userNameTextView.setText("Hola "+ account.getGivenName() +"!");
+            userNameTextView.setText("Hola " + account.getGivenName() + "!");
             userIdTextView.setText(account.getId());
-        }
-        else {
+        } else {
             goLogInScreen();
         }
 
     }
 
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
     }
 
@@ -143,36 +138,35 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         finish();
     }
 
-    public void logOut(View view){
+    public void logOut(View view) {
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
+                if (status.isSuccess()) {
                     Toast.makeText(getApplicationContext(), "Se cerró la sesión de tu cuenta", Toast.LENGTH_SHORT).show();
-                    sessionClosed();                }
-                else{
+                    sessionClosed();
+                } else {
                     Toast.makeText(getApplicationContext(), R.string.not_close_session, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void revoke(View view){
+    public void revoke(View view) {
         Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
+                if (status.isSuccess()) {
                     Toast.makeText(getApplicationContext(), "Se revocaron los permisos de la app", Toast.LENGTH_SHORT).show();
                     sessionClosed();
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), R.string.not_revoke, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void sessionClosed(){
+    private void sessionClosed() {
         username = "Usuario Anónimo";
         userNameTextView.setText(username);
         userIdTextView.setText("0");

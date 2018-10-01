@@ -5,22 +5,17 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,7 +34,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_splash);
 
-
         //*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -50,10 +44,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         //*/
-
     }
-
-
 
     @Override
     protected void onStart() {
@@ -66,11 +57,10 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 goMainScreen();
                 //*
                 OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-                if(opr.isDone()){
+                if (opr.isDone()) {
                     GoogleSignInResult result = opr.get();
                     handleSignInResult(result);
-                }
-                else{
+                } else {
                     opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                         @Override
                         public void onResult(@NonNull GoogleSignInResult result) {
@@ -80,23 +70,22 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 }
                 //*/
             }
-        },1500);
+        }, 1500);
         //*/
     }
 
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
     }
 
-    private void handleSignInResult(GoogleSignInResult result){
-        if(result.isSuccess()){
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
             sessionId = account.getId();
             sessionUser = account.getGivenName();
 
             goMainScreen();
-        }
-        else {
+        } else {
             goLogInScreen();
         }
 
