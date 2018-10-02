@@ -67,25 +67,32 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String playerNumber = numberView.getText().toString();
 
-                Move lastMove;
-                try {
-
-                    lastMove = game.doNewMove(playerNumber);
-
-                    // IF THE PLAYER WON OR LEFT (FINISHED IS ABORTED OR WON), OPEN FINISHED GAME ACTIVITY
-                    if (game.isGameFinished()) {
-                        GoToFinishedGameActivity();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
+                if (playerNumber.length() < 4)
+                {
+                    Toast.makeText(getApplicationContext(), "Debe ingresar un número de 4 cifras", Toast.LENGTH_SHORT).show();
                 }
-                String moves = lastMove.toString() + "\n" + movesET.getText().toString();
-                movesET.setText(moves);
+                else
+                {
+                    Move lastMove;
+                    try {
 
-//                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        lastMove = game.doNewMove(playerNumber);
+
+                        // IF THE PLAYER WON OR LEFT (FINISHED IS ABORTED OR WON), OPEN FINISHED GAME ACTIVITY
+                        if (game.isGameFinished()) {
+                            GoToFinishedGameActivity();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    String moves = lastMove.toString() + "\n" + movesET.getText().toString();
+                    movesET.setText(moves);
+                    numberView.setText("");
+
+                }
             }
         });
 
