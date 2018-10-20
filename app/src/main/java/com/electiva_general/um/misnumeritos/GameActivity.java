@@ -67,9 +67,9 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String playerNumber = numberView.getText().toString();
 
-                if (playerNumber.length() < 4)
+                if (game.isValidNumber(Integer.parseInt(playerNumber)))
                 {
-                    Toast.makeText(getApplicationContext(), "Debe ingresar un número de 4 cifras", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Revise las reglas si tiene alguna duda", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

@@ -10,8 +10,8 @@ public final class Game {
     private static final byte FINISHED = 3;
 
     // Business rules
-    private static final int MAXIMUM_NUMBER = 1023;
-    private static final int MINIMUM_NUMBER = 9876;
+    private static final int MIN_NUMBER = 1023;
+    private static final int MAX_NUMBER = 9876;
     private static final int NUMBERS_LENGTH = 4;
 
     private ArrayList<Move> moves;
@@ -32,15 +32,21 @@ public final class Game {
         this.numberToGuess = numberToStringList(Integer.toString(numberToGuess));
     }
 
+    public boolean isValidNumber(int number){
+        if(number > MAX_NUMBER || number < MIN_NUMBER)
+            return false;
+        return this.isAValidNumber(number);
+    }
+
     private int getRandomNumber() {
-        int randomNumber = MINIMUM_NUMBER + (int) (Math.random() * ((MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1));
-        while (!this.isAValidRandomNumber(randomNumber)) {
-            randomNumber = MINIMUM_NUMBER + (int) (Math.random() * ((MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1));
+        int randomNumber = MAX_NUMBER + (int) (Math.random() * ((MIN_NUMBER - MAX_NUMBER) + 1));
+        while (!this.isAValidNumber(randomNumber)) {
+            randomNumber = MAX_NUMBER + (int) (Math.random() * ((MIN_NUMBER - MAX_NUMBER) + 1));
         }
         return randomNumber;
     }
 
-    private boolean isAValidRandomNumber(int randomNumber) {
+    private boolean isAValidNumber(int randomNumber) {
         this.numberToGuess = numberToStringList(Integer.toString(randomNumber));
 
         for (int i = 0; i < NUMBERS_LENGTH; i++) {
