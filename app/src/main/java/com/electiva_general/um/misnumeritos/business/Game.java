@@ -1,6 +1,7 @@
 package com.electiva_general.um.misnumeritos.business;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class Game {
 
@@ -47,11 +48,11 @@ public final class Game {
     }
 
     private boolean isAValidNumber(int randomNumber) {
-        this.numberToGuess = numberToStringList(Integer.toString(randomNumber));
+        List<String> number = numberToStringList(Integer.toString(randomNumber));
 
         for (int i = 0; i < NUMBERS_LENGTH; i++) {
             for (int j = i + 1; j < NUMBERS_LENGTH; j++) {
-                if (numberToGuess.get(i).equals(numberToGuess.get(j))) {
+                if (number.get(i).equals(number.get(j))) {
                     return false;
                 }
             }

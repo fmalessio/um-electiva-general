@@ -2,7 +2,7 @@ package com.electiva_general.um.misnumeritos.business;
 
 import com.electiva_general.um.misnumeritos.business.Score;
 
-public final class ScoreNode {
+    public final class ScoreNode {
 
     private String key;
     private Score score;
