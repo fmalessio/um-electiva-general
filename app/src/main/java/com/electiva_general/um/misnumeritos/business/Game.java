@@ -33,9 +33,16 @@ public final class Game {
         this.numberToGuess = numberToStringList(Integer.toString(numberToGuess));
     }
 
-    public boolean isValidNumber(int number){
+    public boolean isValidNumber(String playerNumber){
+
+        if (playerNumber.length() != NUMBERS_LENGTH)
+            return false;
+
+        int number = Integer.parseInt(playerNumber);
+
         if(number > MAX_NUMBER || number < MIN_NUMBER)
             return false;
+
         return this.isAValidNumber(number);
     }
 

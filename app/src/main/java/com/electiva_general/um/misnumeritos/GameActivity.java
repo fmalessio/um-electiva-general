@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String playerNumber = numberView.getText().toString();
 
-                if (game.isValidNumber(Integer.parseInt(playerNumber)))
+                if (!game.isValidNumber(playerNumber))
                 {
                     Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Revise las reglas si tiene alguna duda", Toast.LENGTH_SHORT).show();
                 }
