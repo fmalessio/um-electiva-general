@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private Button revokeButton;
 
     private TextView userNameTextView;
-    private TextView userIdTextView;
 
 
     // Silent LogIn
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         userNameTextView = (TextView) findViewById(R.id.nameTextView);
-        userIdTextView = (TextView) findViewById(R.id.idTextView);
 
         playButton = findViewById(R.id.playButton);
         scoresButton = findViewById(R.id.scoresButton);
@@ -95,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onStart() {
         super.onStart();
-        userIdTextView.setText("0");
 
         //*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
@@ -120,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             username = account.getDisplayName();
             userNameTextView.setText("Hola " + account.getGivenName() + "!");
-            userIdTextView.setText(account.getId());
         } else {
             goLogInScreen();
         }
@@ -169,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void sessionClosed() {
         username = "Usuario Anónimo";
         userNameTextView.setText(username);
-        userIdTextView.setText("0");
 
         playButton.setEnabled(false);
         scoresButton.setEnabled(false);

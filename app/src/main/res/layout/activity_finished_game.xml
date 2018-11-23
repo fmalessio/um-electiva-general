@@ -11,18 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/textView3"
+        android:layout_below="@id/tvAFG_topten"
         android:scrollbars="vertical" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvAFG_topten"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvAFG_number"
         android:text="TOP TEN:"
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:background="@android:color/holo_orange_dark"
+        android:fontFamily="serif"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
@@ -31,8 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
         android:text="Titulo"
         android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -42,9 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvAFG_title"
         android:layout_centerHorizontal="true"
+        android:fontFamily="casual"
         android:text="mensaje"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="italic" />
 
     <TextView
@@ -54,7 +60,8 @@
         android:layout_below="@+id/tvAFG_message"
         android:layout_centerHorizontal="true"
         android:text="intentos"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvAFG_number"
@@ -63,6 +70,7 @@
         android:layout_below="@+id/tvAFG_attempts"
         android:layout_centerHorizontal="true"
         android:text="Numero"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

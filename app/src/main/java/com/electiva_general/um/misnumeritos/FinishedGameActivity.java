@@ -159,11 +159,15 @@ public class FinishedGameActivity extends AppCompatActivity {
         tvTitle.setText(title);
         tvMessage.setText(message);
         tvAttempts.setText(attempts + " intentos");
-        tvNumber.setText("Número jugado: " + numberToGuess);
+
+        String number = "";
+        for (String s : numberToGuess) {
+            number += s;
+        }
+        tvNumber.setText("Número jugado: " + number);
     }
 
     private void updateDatabase(final Score score) {
-
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference scoresRef = database.getReference();
@@ -197,8 +201,6 @@ public class FinishedGameActivity extends AppCompatActivity {
              }
          }
         );
-
-
     }
 
 

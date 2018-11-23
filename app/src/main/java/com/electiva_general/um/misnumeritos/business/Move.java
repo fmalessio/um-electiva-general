@@ -30,12 +30,8 @@ public final class Move {
 
     @Override
     public String toString() {
-        /*return "Resultado{" +
-                "Número jugado =" + playedNumber +
-                ", Cantidad Bien =" + assertedNumberAndIndex +
-                ", Cantidad Regular =" + assertedNumber +
-                '}';*/
-        return "Resultado: " + ShowPlayedNumber() + " - Bien=" + assertedNumberAndIndex +
+        return "Resultado: " + ShowPlayedNumber() +
+                " - Bien=" + assertedNumberAndIndex +
                 ", Regular=" + assertedNumber;
     }
 

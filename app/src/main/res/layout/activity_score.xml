@@ -7,12 +7,15 @@
     android:paddingTop="@dimen/padding_top">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvAS_topten"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
         android:text="TOP TEN"
         android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:background="@android:color/holo_orange_dark"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -20,7 +23,7 @@
         android:id="@+id/listView_score"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/tvAS_topten"
         android:layout_centerHorizontal="true"
         android:scrollbars="vertical" />
 </RelativeLayout>
