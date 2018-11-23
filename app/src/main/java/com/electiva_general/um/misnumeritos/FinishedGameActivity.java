@@ -6,26 +6,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.electiva_general.um.misnumeritos.business.Game;
 import com.electiva_general.um.misnumeritos.business.Score;
-import com.electiva_general.um.misnumeritos.business.ScoreNode;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class FinishedGameActivity extends AppCompatActivity {
 
     // Para recuperar los datos del top ten
     DatabaseReference dref;
+    private boolean insertNode;
+    private DataSnapshot victimNode;
     ListView listview;
     ArrayList<String> list = new ArrayList<>();
-    ArrayList<ScoreNode> topTenList = new ArrayList<>();
+    ArrayList<Score> topTenList = new ArrayList<>();
     private ArrayList<String> numberToGuess;
     private String username;
     private int attempts;
@@ -34,6 +38,8 @@ public class FinishedGameActivity extends AppCompatActivity {
     private TextView tvMessage;
     private TextView tvNumber;
     private TextView tvAttempts;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +73,11 @@ public class FinishedGameActivity extends AppCompatActivity {
         // TODO: show on screen the number of moves (attempts) that the player made before leaving or winning
         if (isGameWon) {
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference scoresRef = database.getReference();
+            insertNode = true;
+            victimNode = null;
 
-            // RECORDAR: TRABAJA CON ESTRUCTURA DE ARBOL, NO COMO DB RELACIONAL !!!
-            // Realiza el insert de un ID en el nodo "scores", y recupera en key el valor del ID insertado
-            String key = scoresRef.child("scores").push().getKey();
-            // Inserta los datos de la clase Score dentro del nodo "key" creado
-
-            final ScoreNode scoreNode = new ScoreNode(key, new Score(username, attempts));
-            scoresRef.child("scores/" + key).setValue(scoreNode);
-
-            Toast.makeText(this, scoreNode.getScore().getUser() + "-" + scoreNode.getScore().getAttempts(), Toast.LENGTH_SHORT).show();
+            Score score = new Score(username, attempts);
+            updateDatabase(score);
         }
 
 
@@ -102,39 +101,28 @@ public class FinishedGameActivity extends AppCompatActivity {
     private void loadTopTen() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dref = database.getReference();
-        final ArrayAdapter<ScoreNode> adapter = new ArrayAdapter<ScoreNode>(this, android.R.layout.simple_list_item_1, topTenList);
+        final ArrayAdapter<Score> adapter = new ArrayAdapter<Score>(this, android.R.layout.simple_list_item_1, topTenList);
         listview.setAdapter(adapter);
 
-        dref.child("scores").orderByChild("score/attempts").limitToFirst(10)
+        dref.child("scores").orderByChild("attempts").limitToFirst(Game.SCORES_QTY)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
-                        if (topTenList.size() < 10 ||
-                                sn.getScore().getAttempts() < ((ScoreNode) topTenList.get(9)).getScore().getAttempts()) {
-                            topTenList.add(sn);
-                        }
+                        Score sn = dataSnapshot.getValue(Score.class);
+                        topTenList.add(sn);
+                        Collections.sort(topTenList);
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
-                        int i = 0;
-                        while (i < topTenList.size()) {
-                            if (topTenList.get(i).getKey() == sn.getKey()) {
-                                topTenList.get(i).setKey(sn.getKey());
-                                i = topTenList.size();
-                            } else
-                                i++;
-                        }
-                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
+                        Score sn = dataSnapshot.getValue(Score.class);
                         topTenList.remove(sn);
+                        Collections.sort(topTenList);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -173,5 +161,45 @@ public class FinishedGameActivity extends AppCompatActivity {
         tvAttempts.setText(attempts + " intentos");
         tvNumber.setText("Número jugado: " + numberToGuess);
     }
+
+    private void updateDatabase(final Score score) {
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference scoresRef = database.getReference();
+
+        Query query = scoresRef.child("scores").orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+             @Override
+             public void onDataChange( DataSnapshot dataSnapshot) {
+                 if (dataSnapshot.getChildrenCount() >= Game.SCORES_QTY) {
+                     insertNode = false;
+                     for (DataSnapshot dsScore : dataSnapshot.getChildren()) {
+                         if (victimNode == null || victimNode.getValue(Score.class).getAttempts() <= dsScore.getValue(Score.class).getAttempts())
+                             victimNode = dsScore;
+                     }
+
+                     if (victimNode.getValue(Score.class).getAttempts() > score.getAttempts()) {
+                         scoresRef.child("scores").push().setValue(score);
+                         victimNode.getRef().removeValue();
+                     }
+                 }
+
+                 if (insertNode) {
+                     scoresRef.child("scores").push().setValue(score);
+                 } else {
+                     insertNode = true;
+                 }
+             }
+
+             @Override
+             public void onCancelled( DatabaseError databaseError) {
+             }
+         }
+        );
+
+
+    }
+
 
 }

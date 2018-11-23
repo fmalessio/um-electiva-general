@@ -66,10 +66,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String playerNumber = numberView.getText().toString();
+                String moves = "";
 
                 if (!game.isValidNumber(playerNumber))
                 {
-                    Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Revise las reglas si tiene alguna duda", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Debe ser un número entre "+Game.MIN_NUMBER + " y " + Game.MAX_NUMBER + " y sin repetir dígitos", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -77,6 +78,10 @@ public class GameActivity extends AppCompatActivity {
                     try {
 
                         lastMove = game.doNewMove(playerNumber);
+
+                        moves = "Intento:" + game.getNumberOfMoves() + " - " + lastMove.toString() + "\n" + movesET.getText().toString();
+                        movesET.setText(moves);
+                        numberView.setText("");
 
                         // IF THE PLAYER WON OR LEFT (FINISHED IS ABORTED OR WON), OPEN FINISHED GAME ACTIVITY
                         if (game.isGameFinished()) {
@@ -88,9 +93,9 @@ public class GameActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    String moves = lastMove.toString() + "\n" + movesET.getText().toString();
-                    movesET.setText(moves);
-                    numberView.setText("");
+                    //String moves = lastMove.toString() + "\n" + movesET.getText().toString();
+                    //movesET.setText(moves);
+                    //numberView.setText("");
 
                 }
             }

@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.electiva_general.um.misnumeritos.business.ScoreNode;
+import com.electiva_general.um.misnumeritos.business.Game;
+import com.electiva_general.um.misnumeritos.business.Score;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class ScoreActivity extends AppCompatActivity {
 
     ListView listview;
-    ArrayList<ScoreNode> topTenList = new ArrayList<>();
+    ArrayList<Score> topTenList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,37 +43,24 @@ public class ScoreActivity extends AppCompatActivity {
     private void loadTopTen() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dref = database.getReference();
-        final ArrayAdapter<ScoreNode> adapter = new ArrayAdapter<ScoreNode>(this, android.R.layout.simple_list_item_1, topTenList);
+        final ArrayAdapter<Score> adapter = new ArrayAdapter<Score>(this, android.R.layout.simple_list_item_1, topTenList);
         listview.setAdapter(adapter);
 
-        dref.child("scores").orderByChild("score/attempts").limitToFirst(10)
+        dref.child("scores").orderByChild("attempts").limitToFirst(Game.SCORES_QTY)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
+                        Score sn = dataSnapshot.getValue(Score.class);
                         topTenList.add(sn);
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
-                        int i = 0;
-                        while (i < topTenList.size()) {
-                            if (topTenList.get(i).getKey() == sn.getKey()) {
-                                topTenList.get(i).setKey(sn.getKey());
-                                i = topTenList.size();
-                            } else
-                                i++;
-                        }
-                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        ScoreNode sn = dataSnapshot.getValue(ScoreNode.class);
-                        topTenList.remove(sn);
-                        adapter.notifyDataSetChanged();
                     }
 
                     @Override

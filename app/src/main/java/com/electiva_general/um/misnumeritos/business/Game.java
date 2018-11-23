@@ -11,8 +11,9 @@ public final class Game {
     private static final byte FINISHED = 3;
 
     // Business rules
-    private static final int MIN_NUMBER = 1023;
-    private static final int MAX_NUMBER = 9876;
+    public static final int SCORES_QTY = 5; // TODO: cambiar a 10 la cantidad de nodos de score
+    public static final int MIN_NUMBER = 1023;
+    public static final int MAX_NUMBER = 9876;
     private static final int NUMBERS_LENGTH = 4;
 
     private ArrayList<Move> moves;
@@ -24,8 +25,6 @@ public final class Game {
         this.state = Game.PLAYING;
         this.moves = new ArrayList<>();
         setRandomNumber();
-
-        // TODO: save new game on database
     }
 
     private void setRandomNumber() {
@@ -72,7 +71,6 @@ public final class Game {
 
         if (state != PLAYING) {
             throw new Exception("PARTIDA FINALIZADA");
-            // TODO: delete the throws and go to the finished activity
         }
 
         Move output = new Move(this.numberToGuess, playedNumberList);
@@ -81,8 +79,6 @@ public final class Game {
         if (isWinnerMove()) {
             state = Game.FINISHED;
         }
-
-        // TODO: save on database: the new move, the number of attempts and the new game state if applicable
 
         return output;
     }
@@ -93,6 +89,7 @@ public final class Game {
 
         // Convert char[] to ArrayList<String>
         ArrayList<String> output = new ArrayList();
+
         for (char digit : digits) {
             String sChar = Character.toString(digit);
             output.add(sChar);
@@ -120,12 +117,9 @@ public final class Game {
     // e) Leave the game ("Me doy")
     public void leave() {
         state = Game.ABORTED;
-
-        // TODO: save new game state on database
     }
 
     public boolean isGameFinished(){
-        //return (state != Game.ABORTED && state != Game.FINISHED);
         return (state == Game.ABORTED || state == Game.FINISHED);
     }
 

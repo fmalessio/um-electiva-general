@@ -9,15 +9,6 @@
     android:paddingTop="@dimen/padding_top"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/idTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="idUsuario"
-        android:textSize="10sp" />
-
     <!-- Logo -->
     <ImageView
         android:id="@+id/imageView"
