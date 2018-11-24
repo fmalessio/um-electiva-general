@@ -23,13 +23,12 @@ import java.util.Collections;
 
 public class FinishedGameActivity extends AppCompatActivity {
 
-    // Para recuperar los datos del top ten
-    DatabaseReference dref;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dref = database.getReference();
     private boolean insertNode;
     private DataSnapshot victimNode;
 
     ListView listview;
-    //ArrayList<String> list = new ArrayList<>();
     ArrayList<Score> topTenList = new ArrayList<>();
     private ArrayList<String> numberToGuess;
     private String username;
@@ -94,8 +93,7 @@ public class FinishedGameActivity extends AppCompatActivity {
 
 
     private void loadTopTen() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference dref = database.getReference();
+
         final ArrayAdapter<Score> adapter = new ArrayAdapter<Score>(this, android.R.layout.simple_list_item_1, topTenList);
         listview.setAdapter(adapter);
 
@@ -134,11 +132,11 @@ public class FinishedGameActivity extends AppCompatActivity {
     public void loadUIMessages() {
         String title;
         String message;
-        String attemptsQty = attempts + " intentos";
-        String number = "Número jugado: ";
+        String attemptsQty = "Intentos: " + attempts;
+        String playedNumber = "Número jugado: ";
 
         for (String s : numberToGuess) {
-            number += s;
+            playedNumber += s;
         }
 
         if (isGameWon) {
@@ -146,9 +144,8 @@ public class FinishedGameActivity extends AppCompatActivity {
             if (attempts == 1) {
                 title = "GENIO/A!!!";
                 message = "En un solo intento!";
-                attemptsQty = "Adivinaste el número";
             } else if (attempts <= 4) {
-                message = " el número";
+                message = "Adivinaste el número";
             } else if (attempts <= 10) {
                 message = "Probá hacerlo en menos intentos";
             } else {
@@ -162,15 +159,12 @@ public class FinishedGameActivity extends AppCompatActivity {
         tvTitle.setText(title);
         tvMessage.setText(message);
         tvAttempts.setText(attemptsQty);
-        tvNumber.setText(number);
+        tvNumber.setText(playedNumber);
     }
 
     private void updateDatabase(final Score score) {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference scoresRef = database.getReference();
-
-        Query query = scoresRef.child("scores").orderByKey();
+        Query query = dref.child("scores").orderByKey();
         query.addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange( DataSnapshot dataSnapshot) {
@@ -182,13 +176,13 @@ public class FinishedGameActivity extends AppCompatActivity {
                      }
 
                      if (victimNode.getValue(Score.class).getAttempts() > score.getAttempts()) {
-                         scoresRef.child("scores").push().setValue(score);
+                         dref.child("scores").push().setValue(score);
                          victimNode.getRef().removeValue();
                      }
                  }
 
                  if (insertNode) {
-                     scoresRef.child("scores").push().setValue(score);
+                     dref.child("scores").push().setValue(score);
                  } else {
                      insertNode = true;
                  }

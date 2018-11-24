@@ -15,8 +15,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ScoreActivity extends AppCompatActivity {
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dref = database.getReference();
 
     ListView listview;
     ArrayList<Score> topTenList = new ArrayList<>();
@@ -39,8 +43,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
     private void loadTopTen() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference dref = database.getReference();
+
         final ArrayAdapter<Score> adapter = new ArrayAdapter<Score>(this, android.R.layout.simple_list_item_1, topTenList);
         listview.setAdapter(adapter);
 
@@ -50,6 +53,7 @@ public class ScoreActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Score sn = dataSnapshot.getValue(Score.class);
                     topTenList.add(sn);
+                    Collections.sort(topTenList);
                     adapter.notifyDataSetChanged();
                 }
 
@@ -59,6 +63,10 @@ public class ScoreActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    Score sn = dataSnapshot.getValue(Score.class);
+                    topTenList.remove(sn);
+                    Collections.sort(topTenList);
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override

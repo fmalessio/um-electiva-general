@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private TextView userNameTextView;
 
-
     // Silent LogIn
     private GoogleApiClient googleApiClient;
 

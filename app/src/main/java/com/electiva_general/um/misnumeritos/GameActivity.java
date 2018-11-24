@@ -54,8 +54,12 @@ public class GameActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Ya tenemos un numerito para que adivines", Toast.LENGTH_SHORT).show();
 
-        // Test show
-        this.statusView.setText(game.getNumberToGuess().toString());
+
+        String info = "Ingresá tu jugada";
+        // Test show: TODO: Comment next line on release
+        //info = game.getNumberToGuess().toString();
+        this.statusView.setText(info);
+
 
         // events
         addListeners();
