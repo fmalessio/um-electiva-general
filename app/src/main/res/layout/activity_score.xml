@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_orange_dark"
         android:fontFamily="serif"
-        android:text="TOP TEN"
+        android:text="TOP TEN:"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:background="@android:color/holo_orange_dark"
         android:textSize="30sp"
         android:textStyle="bold" />
 

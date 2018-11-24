@@ -35,8 +35,6 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
     private void addListeners() {
-        // TODO: add button to start a new game (navigate to game activity)
-        // TODO: add button to see scores (navigate to scores activity)
     }
 
 
@@ -47,29 +45,29 @@ public class ScoreActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
         dref.child("scores").orderByChild("attempts").limitToFirst(Game.SCORES_QTY)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Score sn = dataSnapshot.getValue(Score.class);
-                        topTenList.add(sn);
-                        adapter.notifyDataSetChanged();
-                    }
+            .addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Score sn = dataSnapshot.getValue(Score.class);
+                    topTenList.add(sn);
+                    adapter.notifyDataSetChanged();
+                }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                    }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
     }
 }

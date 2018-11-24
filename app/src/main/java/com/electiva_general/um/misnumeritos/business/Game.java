@@ -11,7 +11,7 @@ public final class Game {
     private static final byte FINISHED = 3;
 
     // Business rules
-    public static final int SCORES_QTY = 5; // TODO: cambiar a 10 la cantidad de nodos de score
+    public static final int SCORES_QTY = 10; // TODO: cambiar a 10 la cantidad de nodos de score
     public static final int MIN_NUMBER = 1023;
     public static final int MAX_NUMBER = 9876;
     private static final int NUMBERS_LENGTH = 4;

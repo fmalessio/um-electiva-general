@@ -27,13 +27,15 @@ public class FinishedGameActivity extends AppCompatActivity {
     DatabaseReference dref;
     private boolean insertNode;
     private DataSnapshot victimNode;
+
     ListView listview;
-    ArrayList<String> list = new ArrayList<>();
+    //ArrayList<String> list = new ArrayList<>();
     ArrayList<Score> topTenList = new ArrayList<>();
     private ArrayList<String> numberToGuess;
     private String username;
     private int attempts;
     private boolean isGameWon;
+
     private TextView tvTitle;
     private TextView tvMessage;
     private TextView tvNumber;
@@ -67,12 +69,8 @@ public class FinishedGameActivity extends AppCompatActivity {
         }
 
 
-        // TODO: load winner or looser message on screen according to variable "isGameWon"
         // if isGameWon == false, the player left the game; otherwise, the game was won
-        // TODO: show on screen the number that the player had to guess
-        // TODO: show on screen the number of moves (attempts) that the player made before leaving or winning
         if (isGameWon) {
-
             insertNode = true;
             victimNode = null;
 
@@ -80,13 +78,10 @@ public class FinishedGameActivity extends AppCompatActivity {
             updateDatabase(score);
         }
 
-
         addListeners();
     }
 
     private void addListeners() {
-        // TODO: add button to start a new game (navigate to game activity)
-        // TODO: add button to see scores (navigate to scores activity)
     }
 
     @Override
@@ -139,14 +134,21 @@ public class FinishedGameActivity extends AppCompatActivity {
     public void loadUIMessages() {
         String title;
         String message;
+        String attemptsQty = attempts + " intentos";
+        String number = "Número jugado: ";
+
+        for (String s : numberToGuess) {
+            number += s;
+        }
 
         if (isGameWon) {
             title = "GANASTE!";
             if (attempts == 1) {
                 title = "GENIO/A!!!";
                 message = "En un solo intento!";
+                attemptsQty = "Adivinaste el número";
             } else if (attempts <= 4) {
-                message = "Adivinaste el número";
+                message = " el número";
             } else if (attempts <= 10) {
                 message = "Probá hacerlo en menos intentos";
             } else {
@@ -156,15 +158,11 @@ public class FinishedGameActivity extends AppCompatActivity {
             title = "Pecho frío!";
             message = "No te animaste a adivinarlo...";
         }
+
         tvTitle.setText(title);
         tvMessage.setText(message);
-        tvAttempts.setText(attempts + " intentos");
-
-        String number = "";
-        for (String s : numberToGuess) {
-            number += s;
-        }
-        tvNumber.setText("Número jugado: " + number);
+        tvAttempts.setText(attemptsQty);
+        tvNumber.setText(number);
     }
 
     private void updateDatabase(final Score score) {

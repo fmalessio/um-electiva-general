@@ -70,7 +70,7 @@ public class GameActivity extends AppCompatActivity {
 
                 if (!game.isValidNumber(playerNumber))
                 {
-                    Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Debe ser un número entre "+Game.MIN_NUMBER + " y " + Game.MAX_NUMBER + " y sin dígitos repetidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "El número ingresado no es válido. Debe ser un número entre " + Game.MIN_NUMBER + " y " + Game.MAX_NUMBER + " sin dígitos repetidos", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
                     try {
                         lastMove = game.doNewMove(playerNumber);
 
-                        moves = "Intento:" + game.getNumberOfMoves() + " - " + lastMove.toString() + "\n" + movesET.getText().toString();
+                        moves = "Intento: " + game.getNumberOfMoves() + " - " + lastMove.toString() + "\n" + movesET.getText().toString();
                         movesET.setText(moves);
                         numberView.setText("");
 

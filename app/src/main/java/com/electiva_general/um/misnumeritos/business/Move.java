@@ -30,7 +30,7 @@ public final class Move {
 
     @Override
     public String toString() {
-        return "Resultado: " + ShowPlayedNumber() +
+        return "Nº: " + ShowPlayedNumber() +
                 " - Bien=" + assertedNumberAndIndex +
                 ", Regular=" + assertedNumber;
     }
