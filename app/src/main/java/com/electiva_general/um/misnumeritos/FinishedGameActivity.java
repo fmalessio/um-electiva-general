@@ -58,8 +58,6 @@ public class FinishedGameActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listView_finished_score);
 
 
-        // TODO: THESE VALUES MAY BE RETRIEVED FROM DATABASE AS A SAFER PRACTICE, INSTEAD OF GETTING THEM FROM THE PREVIOUS ACTIVITY
-        // TODO: if extras is null, or any of the keys are not found, send error message to screen
         if (extras != null) {
             numberToGuess = extras.getStringArrayList("NumberToGuess");
             username = extras.getString("Username");

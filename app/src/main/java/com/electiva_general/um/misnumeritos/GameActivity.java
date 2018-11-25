@@ -32,8 +32,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Bundle extras = getIntent().getExtras();
-        // TODO: THESE VALUES MAY BE RETRIEVED FROM DATABASE AS A SAFER PRACTICE, INSTEAD OF GETTING THEM FROM THE PREVIOUS ACTIVITY
-        // TODO: if extras is null, or any of the keys are not found, send error message to screen
+
         if (extras != null) {
             username = extras.getString("Username");
         }
