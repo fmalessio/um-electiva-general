@@ -94,7 +94,7 @@
         android:layout_below="@+id/instructionsButton"
         android:layout_centerHorizontal="true"
         android:background="@drawable/my_button_bg"
-        android:text="Acerca de"
+        android:text="Acerca de..."
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/white"
         android:textStyle="bold|italic"

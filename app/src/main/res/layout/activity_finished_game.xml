@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvAFG_number"
-        android:text="TOP TEN:"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
         android:background="@android:color/holo_orange_dark"
         android:fontFamily="serif"
+        android:text="TOP TEN"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
 
