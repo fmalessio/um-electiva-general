@@ -73,19 +73,36 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
-                gameActivity.putExtra("Username", username);
-                startActivity(gameActivity);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("Username", username);
+                startActivity(intent);
             }
         });
 
         scoresButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent scoreActivity = new Intent(MainActivity.this, ScoreActivity.class);
-                startActivity(scoreActivity);
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+                startActivity(intent);
             }
         });
+
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, InstructionsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

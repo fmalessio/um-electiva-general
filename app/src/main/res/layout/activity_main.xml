@@ -19,15 +19,6 @@
         app:srcCompat="@drawable/logo_mis_numeritos" />
 
     <TextView
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nameTextView"
-        android:layout_centerHorizontal="true"
-        android:text="¿Qué querés hacer?"
-        android:textAlignment="center"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/nameTextView"
         android:layout_width="322dp"
         android:layout_height="wrap_content"
@@ -38,6 +29,15 @@
         android:textAlignment="center"
         android:textSize="26sp" />
 
+    <TextView
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameTextView"
+        android:layout_centerHorizontal="true"
+        android:text="¿Qué querés hacer?"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
     <!-- Play -->
     <Button
         android:id="@+id/playButton"
@@ -45,7 +45,7 @@
         android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/my_button_bg"
         android:text="Jugar"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/white"
@@ -59,10 +59,9 @@
         style="@android:style/Widget.Holo.Light.Button"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/playButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="160dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/my_button_bg"
         android:text="Ver Scores"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/white"
@@ -74,16 +73,16 @@
     <Button
         android:id="@+id/instructionsButton"
         style="@android:style/Widget.Holo.Light.Button"
-        android:layout_width="235dp"
-        android:layout_height="19dp"
-        android:layout_below="@+id/aboutButton"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scoresButton"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/my_button_bg"
         android:text="Instrucciones"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/white"
         android:textStyle="bold|italic"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="146dp"
         tools:layout_editor_absoluteY="147dp" />
 
@@ -91,14 +90,17 @@
     <Button
         android:id="@+id/aboutButton"
         android:layout_width="236dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/scoresButton"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/instructionsButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-160dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/my_button_bg"
         android:text="Acerca de"
-        android:textSize="20sp"
-        android:visibility="invisible" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="147dp" />
 
     <!-- TODO: User info and logOut -->
     <Button
@@ -106,10 +108,9 @@
         style="@android:style/Widget.Holo.Light.Button"
         android:layout_width="236dp"
         android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/revokeButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/my_button_bg"
         android:onClick="logOut"
         android:text="@string/log_out"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -125,8 +126,7 @@
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/my_button_bg"
         android:onClick="revoke"
         android:text="@string/permission_revoke"
         android:textAppearance="@style/TextAppearance.AppCompat"

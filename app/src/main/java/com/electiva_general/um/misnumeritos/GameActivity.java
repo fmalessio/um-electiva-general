@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
 
         String info = "Ingresá tu jugada";
         // Test show: TODO: Comment next line on release
-        //info = game.getNumberToGuess().toString();
+        info = game.getNumberToGuess().toString();
         this.statusView.setText(info);
 
 
