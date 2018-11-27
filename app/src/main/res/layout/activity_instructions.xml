@@ -35,7 +35,7 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="0.5"
-        android:textColor="@android:color/white"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="16sp"
         tools:shadowColor="@android:color/black" />
 
