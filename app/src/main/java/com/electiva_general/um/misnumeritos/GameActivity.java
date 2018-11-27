@@ -109,13 +109,25 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void GoToFinishedGameActivity() {
-        Intent finishedGameActivity = new Intent(GameActivity.this, FinishedGameActivity.class);
-        finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
-        finishedGameActivity.putExtra("Username", username);
-        finishedGameActivity.putExtra("Attempts", game.getNumberOfMoves());
-        finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
+        if(game.isGameWon()){
+            Intent finishedGameActivity = new Intent(GameActivity.this, VictorySlashActivity.class);
+            finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
+            finishedGameActivity.putExtra("Username", username);
+            finishedGameActivity.putExtra("Attempts", game.getNumberOfMoves());
+            finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
 
-        startActivity(finishedGameActivity);
-        finish();
+            startActivity(finishedGameActivity);
+            finish();
+        }
+        else {
+            Intent finishedGameActivity = new Intent(GameActivity.this, LoseSlashActivity.class);
+            finishedGameActivity.putExtra("NumberToGuess", game.getNumberToGuess());
+            finishedGameActivity.putExtra("Username", username);
+            finishedGameActivity.putExtra("Attempts", game.getNumberOfMoves());
+            finishedGameActivity.putExtra("IsGameWon", game.isGameWon());
+
+            startActivity(finishedGameActivity);
+            finish();
+        }
     }
 }

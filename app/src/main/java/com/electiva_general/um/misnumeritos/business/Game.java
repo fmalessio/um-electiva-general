@@ -8,7 +8,7 @@ public final class Game {
     // Game status
     private static final byte PLAYING = 1;
     private static final byte ABORTED = 2;
-    private static final byte FINISHED = 3;
+    public static final byte FINISHED = 3;
 
     // Business rules
     public static final int SCORES_QTY = 10; // TODO: cambiar a 10 la cantidad de nodos de score
