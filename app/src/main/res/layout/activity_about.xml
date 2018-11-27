@@ -4,6 +4,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_water"
     android:paddingBottom="@dimen/padding_bottom"
     android:paddingTop="@dimen/padding_top">
 
@@ -12,19 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_orange_dark"
+        android:background="#7733ff"
         android:fontFamily="serif"
         android:text="Acerca de..."
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/listView_aboutApp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/aboutTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvAA_title"
-        android:layout_centerHorizontal="true"
-        android:scrollbars="vertical" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="19dp"
+        android:autoSizeTextType="uniform"
+        android:textAlignment="center"
+        android:shadowColor="@color/browser_actions_text_color"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="0.5"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        tools:shadowColor="@android:color/black" />
+
 </RelativeLayout>

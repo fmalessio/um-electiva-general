@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud"
+    android:background="@drawable/background_mountains"
     android:paddingBottom="@dimen/padding_bottom"
     android:paddingTop="@dimen/padding_top"
     tools:context=".LogInActivity">
@@ -33,6 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="71dp"
         android:text="O cancela el acceso y cierra la app"
+        android:textColor="@color/backgroud"
         android:textSize="16dp" />
 
     <Button

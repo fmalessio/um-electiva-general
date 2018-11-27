@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_mountains"
     android:paddingBottom="@dimen/padding_bottom"
     android:paddingTop="@dimen/padding_top">
 
@@ -11,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_orange_dark"
+        android:background="#7733ff"
         android:fontFamily="serif"
-        android:text="TOP TEN"
+        android:text="Salón de la Fama"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
 
     <ListView
         android:id="@+id/listView_score"
@@ -25,5 +27,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tvAS_topten"
         android:layout_centerHorizontal="true"
-        android:scrollbars="vertical" />
+        android:backgroundTint="@color/backgroud"
+        android:scrollbars="vertical"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 </RelativeLayout>

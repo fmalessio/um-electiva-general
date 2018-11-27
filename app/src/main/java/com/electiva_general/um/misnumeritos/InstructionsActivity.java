@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public final class InstructionsActivity extends AppCompatActivity {
 
     ListView listview;
+    TextView instructionsTV;
     ArrayList<String> lines = new ArrayList<>();
 
     @Override
@@ -19,8 +21,8 @@ public final class InstructionsActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_instructions);
 
-        listview = (ListView) findViewById(R.id.listView_instructions);
-
+//        listview = (ListView) findViewById(R.id.listView_instructions);
+        instructionsTV = findViewById(R.id.instructionsTV);
         loadText();
 
         addListeners();
@@ -31,21 +33,21 @@ public final class InstructionsActivity extends AppCompatActivity {
 
 
     private void loadText() {
+        String text = "El objetivo del juego consiste en tratar de adivinar el numerito! ¿Crees que podes lograrlo? \n\n";
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lines);
-        listview.setAdapter(adapter);
+        text = text + "¿Como se juega?\n";
+        text = text + "1. El jugador ingresa un número en el cuadro de texto (leer las reglas del número.)\n";
+        text = text + "2. En cada jugada, se indicará el Nº jugado, y la cantidad de aciertos (BIEN) y de existentes pero en otra posición (REGULARES).\n";
+        text = text + "3. A partir de estos datos el jugador deberá adivinar el número.\n";
+        text = text + "4. Sí tu número está entre los 10 primeros tendrás un lugar en EL SALÓN DE LA FAMA!!!\n\n";
 
-        lines.add("El objetivo del juego consiste en tratar de adivinar un número aleatorio, y en cada jugada se irá indicando la cantidad de dígitos acertados o regulares.");
-        lines.add("El número a adivinar (y por tanto el de cada jugada), debe cumplir las siguientes condiciones:");
-        lines.add("Ser de 4 dígitos, los cuales no pueden estar repetidos");
-        lines.add("No comenzar con el dígito 0 (cero)");
-        lines.add("Con estas condiciones, el número debe estar entre 1023 y 9876, y excluyendo cualquier combinación en la que hayan dígitos iguales");
-        lines.add("En cada jugada, se indicará el Nº jugado, y la cantidad de aciertos (BIEN) y de existentes pero en otra posición (REGULARES)");
-        lines.add("Ejemplos de números NO Válidos:\n0389 (comienza con cero)\n1424 (se repite uno o más dígitos)\n629 (no es de 4 dígitos)");
-        lines.add("");
-        lines.add("En caso de adivinar el número, si está entre los 10 con menor cantidad de intentos, su nombre ingresará al TOP TEN");
 
-        adapter.notifyDataSetChanged();
+        text = text + "El número a adivinar debe cumplir las siguientes condiciones:\n";
+        text = text + "1. Debe estar comprendido entre 1023 y 9876, ambos inclusive.\n";
+        text = text + "2. Ser de 4 dígitos, los cuales no pueden estar repetidos. \n";
+        text = text + "Ejemplos de números NO válidos:\n\t\t*0389 (comienza con cero)\n\t\t*1424 (se repite uno o más dígitos)\n\t\t*629 (no es de 4 dígitos)";
+
+        instructionsTV.setText(text);
     }
 
 
